@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4bddf3, #feb47b); /* Gradient background */
+            color: #333;
+            height: 100vh;  /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4bddf3;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 4em 2em;
+            color: #fff;
+            margin-top: 70px; /* Adjusted to prevent overlap with navbar */
+            flex-grow: 1;  /* Allows header to take up available space */
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+        }
+
+        header p {
+            font-size: 1.5em;
+        }
+
+        /* Product Categories */
+        #product-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 4em 2em;
+            gap: 30px;
+            flex-grow: 2; /* Make categories section take up remaining space */
+            align-items: center;
+        }
+
+        .category {
+            text-align: center;
+            width: 250px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .category:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .category img {
+            width: 100%;
+            height: auto;
+            border-bottom: 2px solid #feb47b;
+            transition: opacity 0.3s;
+        }
+
+        .category h2 {
+            margin-top: 0.5em;
+            color: #333;
+        }
+
+        /* New Section for displaying models */
+        #model-display {
+            text-align: center;
+            padding: 2em;
+            display: none; /* Initially hidden */
+        }
+
+        .model-item {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2em;
+        }
+
+        .model-item img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .model-info {
+            text-align: left;
+            padding: 10px;
+        }
+
+        .model-info h3 {
+            margin-bottom: 1em;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .category:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .category:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .category:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .category:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            font-size: 0.9em;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .purchase-btn {
+            padding: 10px 20px;
+            background-color: #feb47b;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        .purchase-btn:hover {
+            background-color: #ff6f20;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #4bddf3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="Signin-and-Signup-Form-main/index_1.html">Signup</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="order.html">Orders</a>
+        <a href="checkout.html">Checkout</a>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <h1>DISCOVER OUR ELECTRONICS</h1>
+        <p>Explore the latest and greatest in electronic gadgets!</p>
+    </header>
+
+    <!-- Product Categories Section -->
+    <section id="product-categories">
+        <div class="category" data-category="laptops">
+            <img src="https://i.ytimg.com/vi/rHBOG5HDr9I/maxresdefault.jpg" alt="Laptops">
+            <h2>LAPTOPS</h2>
+        </div>
+        <div class="category" data-category="phones">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHSqgSoyUXKaTpsa6yyv2pgd2nsdtmiPIKBA&s" alt="Phones">
+            <h2>PHONES</h2>
+        </div>
+        <div class="category" data-category="televisions">
+            <img src="https://www.cnet.com/a/img/resize/9aa009ede2acaddd77f75c20462bde4770d57adb/hub/2022/10/18/c496e8fc-c71e-4a1f-81d1-a2b6e4bda962/budget-tvs-6157.jpg?auto=webp&fit=crop&height=360&width=640" alt="Televisions">
+            <h2>TELEVISIONS</h2>
+        </div>
+        <div class="category" data-category="cameras">
+            <img src="https://cdn.mos.cms.futurecdn.net/WUMLNcKWgv83xdQbe7N3gc-1200-80.jpg" alt="Cameras">
+            <h2>CAMERAS</h2>
+        </div>
+    </section>
+
+    <!-- Section to Display Models of Selected Category -->
+    <section id="model-display">
+        <h2>Available Models</h2>
+        <div class="model-item" id="model-items">
+            <!-- Models will be injected here -->
+        </div>
+        <button class="back-btn" onclick="goBackToCategories()">Back to Categories</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 HOT GADGETS | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Fetch and display models
+function showModels(category) {
+    fetch(`/api/products/${category}`)
+        .then(response => response.json())
+        .then(models => {
+            const modelDisplay = document.getElementById('model-display');
+            const modelItems = document.getElementById('model-items');
+            modelItems.innerHTML = ''; // Clear any previous models
+
+            models.forEach(model => {
+                const modelDiv = document.createElement('div');
+                modelDiv.classList.add('model-info');
+                modelDiv.innerHTML = `
+                    <img src="${model.image}" alt="${model.model}">
+                    <h3>${model.model}</h3>
+                    <p>${model.description}</p>
+                    <p>Stock: ${model.stock}</p>
+                    <p>Price: ₹${model.price}</p>
+                    <button class="purchase-btn" onclick="purchaseItem('${model.model}')">Purchase Now</button>
+                `;
+                modelItems.appendChild(modelDiv);
+            });
+
+            modelDisplay.style.display = 'block'; // Show model display section
+        });
+}
+
+// Handle purchase
+function purchaseItem(model) {
+    fetch('/api/purchase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            goBackToCategories();
+        } else {
+            alert(data.message);
+        }
+    });
+}
+
+        // Product models and stock details
+       // Product models and stock details
+const products = {
+    laptops: [
+        { model: "Laptop A1", description: "High performance with 16GB RAM", stock: 2, image: "https://m.media-amazon.com/images/I/71tPF+NIiuL.jpg", price: 80000 },
+        { model: "Laptop A2", description: "Budget laptop with 8GB RAM", stock: 2, image: "https://m.media-amazon.com/images/I/41i2nHtb3qL._QL92_SH45_SS200_.jpg", price: 60000 }
+    ],
+    phones: [
+        { model: "Phone X1", description: "Latest model with 128GB storage", stock: 2, image: "https://media.extra.com/s/aurora/100376349_800/Apple-iPhone-16-Pro%2C-5G%2C-6-3-inch%2C-128GB%2C-Natural-Titanium?locale=en-GB,en-*,*&w=200&h=200", price: 160000 },
+        { model: "Phone X2", description: "Mid-range phone with 64GB storage", stock: 2, image: "https://media.extra.com/s/aurora/100315674_800/Apple-iPhone-14%2C-5G%2C-128GB%2C-Blue?locale=en-GB,en-*,*&w=200&h=200", price: 150000 }
+    ],
+    televisions: [
+        { model: "TV 4K A", description: "Smart TV with 4K resolution", stock: 2, image: "https://www.iqelectronics.in/wp-content/uploads/2023/02/IQ-40-Inches-Smart-LED-TV-150x150.jpg", price: 40000 },
+        { model: "TV 4K B", description: "Affordable 4K TV with HDR support", stock: 2, image: "https://nandilathgmart.com/wp-content/uploads/2022/07/55uq9000-aa6-150x150.png", price: 45000 }
+    ],
+    cameras: [
+        { model: "Camera Pro", description: "High-end DSLR camera", stock: 2, image: "https://gppro.in/wp-content/uploads/2020/10/D5600-Camera-with-18-140mm-Lens_1-1-150x150.jpg", price: 26000 },
+        { model: "Camera Lite", description: "Compact camera with HD quality", stock: 2, image: "https://gppro.in/wp-content/uploads/2022/10/Nikon-Z6-Mirrorless-Camera-with-24-70mm-Lens-5-150x150.jpg", price: 20000 }
+    ]
+};
+
+// Function to handle category selection
+function showModels(category) {
+    const modelDisplay = document.getElementById('model-display');
+    const modelItems = document.getElementById('model-items');
+    modelItems.innerHTML = ''; // Clear any previous models
+
+    const models = products[category];
+    models.forEach(model => {
+        const modelDiv = document.createElement('div');
+        modelDiv.classList.add('model-info');
+        modelDiv.innerHTML = `
+            <img src="${model.image}" alt="${model.model}">
+            <h3>${model.model}</h3>
+            <p>${model.description}</p>
+            <p>Stock: ${model.stock}</p>
+            <p>Price: ₹${model.price}</p> <!-- Display the price here -->
+            <button class="purchase-btn" onclick="purchaseItem('${model.model}', ${model.price})">Purchase Now</button>
+        `;
+        modelItems.appendChild(modelDiv);
+    });
+
+    modelDisplay.style.display = 'block'; // Show model display section
+}
+
+// Function to handle item purchase
+function purchaseItem(modelName, price) {
+    // Find the selected product model
+    let selectedModel = null;
+    Object.keys(products).forEach(category => {
+        products[category].forEach(product => {
+            if (product.model === modelName) {
+                selectedModel = product;
+            }
+        });
+    });
+
+    // If the product is found, pass its details to the checkout page via URL
+    if (selectedModel) {
+        const checkoutUrl = `checkout.html?model=${encodeURIComponent(selectedModel.model)}&description=${encodeURIComponent(selectedModel.description)}&price=${selectedModel.price}`;
+        window.location.href = checkoutUrl;
+    }
+}
+
+// Function to go back to categories
+function goBackToCategories() {
+    document.getElementById('model-display').style.display = 'none'; // Hide models
+}
+
+// Add event listeners to category items
+document.querySelectorAll('.category').forEach(category => {
+    category.addEventListener('click', () => {
+        showModels(category.getAttribute('data-category'));
+    });
+});
+        
+    </script>
+</body>
+</html>

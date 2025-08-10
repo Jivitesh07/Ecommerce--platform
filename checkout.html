@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="styleO.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body, html {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(120deg, #78e1f4, #eaab5d);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0;
+        }
+
+        nav {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, .active {
+            color: #69cdee;
+        }
+
+        header {
+            text-align: center;
+            margin-top: 80px; /* Adjusted for nav bar height */
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #fff;
+        }        
+        #checkout-summary {
+            margin-top: 50px;
+            background: #fff;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #checkout-summary h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item h3 {
+            font-size: 1.2em;
+        }
+
+        .cart-item .price {
+            color: #eaab5d;
+        }
+
+        .total-price {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #confirm-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 10px 20px;
+            background-color: #eaab5d;
+            color: #fff;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #confirm-btn:hover {
+            background-color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="Signin-and-Signup-Form-main/index_1.html">Signup</a>
+        <a href="products.html">Products</a>
+        <a href="orders.html">Orders</a>
+        <a href="checkout.html" class="active">Checkout</a>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Checkout</h1>
+        <p>Review your items and confirm your purchase.</p>
+    </header>
+
+    <!-- Checkout Summary Section -->
+    <section id="checkout-summary">
+        <h2>Your Items:</h2>
+        <div id="checkout-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="total-price">Total: ₹<span id="checkout-total">0.00</span></div>
+        <button id="confirm-btn">Confirm Purchase</button>
+    </section>
+
+    <!-- JavaScript for Checkout Page -->
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const checkoutItemsContainer = document.getElementById('checkout-items');
+    const checkoutTotalElement = document.getElementById('checkout-total');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCheckoutItems() {
+        checkoutItemsContainer.innerHTML = '';
+        let total = 0;
+
+        if (cart.length === 0) {
+            checkoutItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            document.getElementById('confirm-btn').disabled = true;
+            return;
+        }
+
+        cart.forEach(item => {
+            total += item.price * item.quantity;
+            const cartItemElement = document.createElement('div');
+            cartItemElement.classList.add('cart-item');
+            cartItemElement.innerHTML = `
+                <h3>${item.name}</h3>
+                <span>Quantity: ${item.quantity}</span>
+                <span class="price">₹${(item.price * item.quantity).toFixed(2)}</span>
+            `;
+            checkoutItemsContainer.appendChild(cartItemElement);
+        });
+
+        checkoutTotalElement.textContent = total.toFixed(2);
+    }
+
+    document.getElementById('confirm-btn').addEventListener('click', () => {
+        alert('Thank you for your purchase!');
+        localStorage.removeItem('cart');
+        window.location.href = 'products.html';
+    });
+
+    renderCheckoutItems();
+});
+</script>
+</body>
+</html>
